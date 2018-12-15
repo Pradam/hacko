@@ -23,7 +23,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Age</label>
-          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Age"
+          <select class="form-control select2" id="age" multiple="multiple" data-placeholder="Select a Age"
                   style="width: 100%;">
             {% for age in ages %}
               <option value="{{age}}">{{age}}</option>
@@ -33,7 +33,7 @@
         <!-- /.form-group -->
         <div class="form-group">
           <label>Smoking</label>
-          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Habits"
+          <select class="form-control select2" id="smoke" multiple="multiple" data-placeholder="Select a Habits"
                   style="width: 100%;">
             {% for smoke in smokings %}
                <option value="{{smoke.0}}">{{smoke.1}}</option>
@@ -46,7 +46,7 @@
       <div class="col-md-6">
         <div class="form-group">
           <label>Gender</label>
-          <select class="form-control select2" data-placeholder="Select a Gender"
+          <select class="form-control" id="gender" data-placeholder="Select a Gender"
                   style="width: 100%;">
             {% for gender in genders %}
                <option value="{{gender.0}}">{{gender.1}}</option>
@@ -56,10 +56,10 @@
         <!-- /.form-group -->
         <div class="form-group">
           <label>Drinking</label>
-          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Habits"
+          <select class="form-control select2" id="drink" multiple="multiple" data-placeholder="Select a Habits"
                   style="width: 100%;">
-            {% for alcohol in alcohols %}
-               <option< value="{{alcohol.0}}">{{alcohol.1}}</option>
+            {% for alcohol in drinking %}
+               <option value="{{alcohol.0}}">{{alcohol.1}}</option>
             {% endfor %}
           </select>
         </div>
@@ -71,8 +71,13 @@
   </div>
   <!-- /.box-body -->
   <div class="box-footer">
-    Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
-    the plugin.
+      <button class="btn btn-primary pull-right" ng-click="GetClaimProbablitiy()">Submit</button>
+  </div>
+  <div>
+    <div id="piechart_3d"></div>
+  </div>
+  <div>
+      <table id="costlist" class="table table-bordered table-striped" role="grid" aria-describedby="example1_info"></table>
   </div>
 </div>
 
@@ -80,6 +85,7 @@
 
 {% block javascriptcontent %}
 <script src="{% static 'js/select2.full.min.js' %}"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script>
   $(function () {
     //Initialize Select2 Elements

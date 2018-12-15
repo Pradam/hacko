@@ -5,6 +5,11 @@ OPTIONAL = {'blank': True, 'null': True}
 
 ACTIVE_CHOICES = ((0, 'Inactive'), (2, 'Active'),)
 
+AGE_RANGE = (('18 - 25'),
+             ('26 - 35'),
+             ('36 - 45'),
+             ('46 - 55'))
+
 ALCOHOL_CHOICES = (
     (1, 'NO'),
     (2, 'OCCATIONALLY'),
@@ -30,9 +35,9 @@ GENDER_CHOICES = (
 )
 
 MEMBER_CHOICES = (
-    (1, 'YES'),
-    (2, 'NO'),
-    (3, 'PENDING')
+(1, 'YES'),
+(2, 'NO'),
+(3, 'PENDING')
 )
 
 class BaseContent(models.Model):
@@ -52,17 +57,17 @@ class BaseContent(models.Model):
         return self.name
 
 class HistoryData(BaseContent):
-
-
-    aadhar_id = models.BigIntegerField()
+    aadhar_id = models.IntegerField()
     name = models.TextField()
     gender = models.IntegerField(choices=GENDER_CHOICES)
     age = models.PositiveIntegerField()
-    coverage = models.BigIntegerField(default=0)
+    premium = models.PositiveIntegerField()
+    coverage = models.PositiveIntegerField()
     is_alcoholic = models.IntegerField(choices=ALCOHOL_CHOICES, default=1)
     is_smoker = models.IntegerField(choices=SMOKING_CHOICES, default=1)
     claimed = models.IntegerField(choices=CLAIM_CHOICES, default=1)
     is_member = models.IntegerField(choices=MEMBER_CHOICES, default=1)
+
     class Meta:
         unique_together = ('aadhar_id',)
 
