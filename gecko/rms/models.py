@@ -5,11 +5,6 @@ OPTIONAL = {'blank': True, 'null': True}
 
 ACTIVE_CHOICES = ((0, 'Inactive'), (2, 'Active'),)
 
-AGE_RANGE = (('18 - 25'),
-             ('26 - 35'),
-             ('36 - 45'),
-             ('46 - 55'))
-
 ALCOHOL_CHOICES = (
     (1, 'NO'),
     (2, 'OCCATIONALLY'),
@@ -34,6 +29,11 @@ GENDER_CHOICES = (
     (3, 'TRANSGENDER')
 )
 
+MEMBER_CHOICES = (
+    (1, 'YES'),
+    (2, 'NO'),
+    (3, 'PENDING')
+)
 
 class BaseContent(models.Model):
     active = models.PositiveIntegerField(choices=ACTIVE_CHOICES,
@@ -51,24 +51,18 @@ class BaseContent(models.Model):
     def __str__(self):
         return self.name
 
-
 class HistoryData(BaseContent):
-    age = models.PositiveIntegerField()
-    gender = models.TextField(editable=False)
-    name = models.CharField(max_length=255, unique=True)
 
 
-class HistoryData(BaseContent):
-    aadhar_id = models.IntegerField()
+    aadhar_id = models.BigIntegerField()
     name = models.TextField()
     gender = models.IntegerField(choices=GENDER_CHOICES)
     age = models.PositiveIntegerField()
-    premium = models.PositiveIntegerField()
-    coverage = models.PositiveIntegerField()
+    coverage = models.BigIntegerField(default=0)
     is_alcoholic = models.IntegerField(choices=ALCOHOL_CHOICES, default=1)
     is_smoker = models.IntegerField(choices=SMOKING_CHOICES, default=1)
     claimed = models.IntegerField(choices=CLAIM_CHOICES, default=1)
-
+    is_member = models.IntegerField(choices=MEMBER_CHOICES, default=1)
     class Meta:
         unique_together = ('aadhar_id',)
 
