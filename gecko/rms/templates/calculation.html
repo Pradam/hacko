@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block csscontent %}
+  <link rel="stylesheet" href="{% static 'css/select2.min.css' %}">
+{% endblock %}
+
+{% block content %}
+<!-- SELECT2 EXAMPLE -->
+<div class="box box-default">
+  <div class="box-header with-border">
+    <h3 class="box-title">Probability Calculation</h3>
+
+    <div class="box-tools pull-right">
+      <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+      <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-remove"></i></button>
+    </div>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Age</label>
+          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Age"
+                  style="width: 100%;">
+            {% for age in ages %}
+              <option value="{{age}}">{{age}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+          <label>Smoking</label>
+          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Habits"
+                  style="width: 100%;">
+            {% for smoke in smokings %}
+               <option value="{{smoke.0}}">{{smoke.1}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+      <div class="col-md-6">
+        <div class="form-group">
+          <label>Gender</label>
+          <select class="form-control select2" data-placeholder="Select a Gender"
+                  style="width: 100%;">
+            {% for gender in genders %}
+               <option value="{{gender.0}}">{{gender.1}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- /.form-group -->
+        <div class="form-group">
+          <label>Drinking</label>
+          <select class="form-control select2" multiple="multiple" data-placeholder="Select a Habits"
+                  style="width: 100%;">
+            {% for alcohol in alcohols %}
+               <option< value="{{alcohol.0}}">{{alcohol.1}}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <!-- /.form-group -->
+      </div>
+      <!-- /.col -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer">
+    Visit <a href="https://select2.github.io/">Select2 documentation</a> for more examples and information about
+    the plugin.
+  </div>
+</div>
+
+{% endblock %}
+
+{% block javascriptcontent %}
+<script src="{% static 'js/select2.full.min.js' %}"></script>
+<script>
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+  });
+</script>
+{% endblock %}
