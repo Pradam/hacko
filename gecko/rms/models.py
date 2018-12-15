@@ -65,7 +65,7 @@ class HistoryData(BaseContent):
     is_alcoholic = models.IntegerField(choices=ALCOHOL_CHOICES, default=1)
     is_smoker = models.IntegerField(choices=SMOKING_CHOICES, default=1)
     claimed = models.IntegerField(choices=CLAIM_CHOICES, default=1)
-
+    is_member = models.BooleanField(default=False)
     class Meta:
         unique_together = ('aadhar_id',)
 
